@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "274232668645",
+    "project_id": "acs-interaction-v1",
+    "storage_bucket": "acs-interaction-v1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274232668645:android:226955561308529b55bf0c",
+        "android_client_info": {
+          "package_name": "br.com.rodrigues.alltech_new_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274232668645-5kuidcrq4h4s1u3agqre0q87ses82rge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.rodrigues.alltech_new_firebase",
+            "certificate_hash": "9660928342f08ca4cdbb8c855db99b2a5bab43bc"
+          }
+        },
+        {
+          "client_id": "274232668645-950qaoirg4daj8ahc1mcpd3q3i4f0tqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzEvc_jQ1KKoDBQSV2RRAYIfIfrPkZji4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274232668645-950qaoirg4daj8ahc1mcpd3q3i4f0tqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
