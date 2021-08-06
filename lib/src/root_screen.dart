@@ -1,5 +1,5 @@
 import 'package:alltech_new_firebase/src/resources/repository.dart';
-import 'package:alltech_new_firebase/src/screens/authentication/login_screen.dart';
+import 'package:alltech_new_firebase/src/screens/authentication/intro_screen.dart';
 import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _RootScreenState extends State<RootScreen> {
     return StreamBuilder<User>(
       stream: _currentUser,
       builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-        return snapshot.hasData ? HomeScreen() : LoginScreen();
+        return snapshot.hasData ? HomeScreen() : IntroScreen();
       },
     );
   }

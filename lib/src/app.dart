@@ -1,5 +1,5 @@
 import 'package:alltech_new_firebase/src/root_screen.dart';
-import 'package:alltech_new_firebase/src/screens/authentication/login_screen.dart';
+import 'package:alltech_new_firebase/src/screens/authentication/intro_screen.dart';
 import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class AlltechApp extends StatelessWidget {
       initialRoute: RootScreen.routeName,
       routes: {
         RootScreen.routeName: (context) => RootScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
+        IntroScreen.routeName: (context) => IntroScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
       },
     );
