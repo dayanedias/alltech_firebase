@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.6.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -125,6 +125,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_neumorphic:
+    dependency: "direct main"
+    description:
+      name: flutter_neumorphic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -191,6 +198,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  polygon_clipper:
+    dependency: "direct main"
+    description:
+      name: polygon_clipper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   provider:
     dependency: "direct main"
     description:
@@ -216,7 +230,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   stack_trace:
     dependency: transitive
     description:
@@ -251,7 +265,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.19"
+    version: "0.3.0"
   typed_data:
     dependency: transitive
     description:

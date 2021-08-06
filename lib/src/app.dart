@@ -1,4 +1,6 @@
 import 'package:alltech_new_firebase/src/root_screen.dart';
+import 'package:alltech_new_firebase/src/screens/authentication/login_screen.dart';
+import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class AlltechApp extends StatelessWidget {
@@ -11,8 +13,11 @@ class AlltechApp extends StatelessWidget {
       theme: ThemeData(
         accentColor: Colors.deepOrange
       ),
+      initialRoute: RootScreen.routeName,
       routes: {
         RootScreen.routeName: (context) => RootScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
     );
   }
