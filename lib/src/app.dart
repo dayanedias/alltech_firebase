@@ -1,24 +1,28 @@
-import 'package:alltech_new_firebase/src/root_screen.dart';
-import 'package:alltech_new_firebase/src/screens/authentication/intro_screen.dart';
-import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
+import 'package:alltech_new_firebase/src/manager/authentication_manager.dart';
+import 'package:alltech_new_firebase/src/screens/authentication/landing_screen.dart';
+import 'package:alltech_new_firebase/src/utils/values/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AlltechApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Alltech App",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        accentColor: Colors.deepOrange
+    return MultiProvider(providers: [
+      Provider(create: (context) => AuthenticationManager()),
+      StreamProvider<User>.value(
+          value: FirebaseAuth.instance.authStateChanges()
+      )
+    ],
+      child: MaterialApp(
+        title: "Alltech App",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          accentColor: ColorConstant.colorMainOrange,
+        ),
+        home: LandingScreen(),
       ),
-      initialRoute: RootScreen.routeName,
-      routes: {
-        RootScreen.routeName: (context) => RootScreen(),
-        IntroScreen.routeName: (context) => IntroScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(),
-      },
     );
   }
 }
