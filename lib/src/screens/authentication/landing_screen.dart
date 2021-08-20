@@ -32,7 +32,7 @@ class LandingScreen extends StatelessWidget {
                   if(snapshot.connectionState == ConnectionState.active) {
                     User user = snapshot.data;
                     if(user == null) {
-                      return IntroScreen();
+                      return LoginScreen();
                     } else {
                       return NavigationBarWidget();
                     }

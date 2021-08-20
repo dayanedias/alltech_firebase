@@ -1,4 +1,4 @@
-import 'package:alltech_new_firebase/src/manager/authentication_manager.dart';
+import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/screens/authentication/landing_screen.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,7 +10,7 @@ class AlltechApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
-      Provider(create: (context) => AuthenticationManager()),
+      ChangeNotifierProvider(create: (context) => UserManager()),
       StreamProvider<User>.value(
           value: FirebaseAuth.instance.authStateChanges()
       )
