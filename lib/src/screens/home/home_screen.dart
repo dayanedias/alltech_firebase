@@ -13,6 +13,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorConstant.colorMainOrange,
+        title: Text("Alltech"),
+        centerTitle: true,
+      ),
       backgroundColor: ColorConstant.colorMainBackground,
       resizeToAvoidBottomInset: false,
       body: Stack(

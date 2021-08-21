@@ -166,8 +166,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         onTap: userManager.loading ? null : () {
                           if(formKey.currentState.validate()) {
                             formKey.currentState.save();
-                            //user.password = Helpers.generatePassword(); //TODO: Descomentar o gerador de senha
-                            user.password = '123456';
+                            user.password = Helpers.generatePassword(); //TODO: Descomentar o gerador de senha
+                            //user.password = '123456';
                             userManager.signUp(
                                 usuario: user,
                                 onFail: (e) {

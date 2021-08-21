@@ -22,14 +22,13 @@ class UserManager extends ChangeNotifier {
     try {
       final UserCredential result = await auth.signInWithEmailAndPassword(
           email: usuario.email, password: usuario.password);
-
       await _loadCurrentUser(firebaseUser: result.user);
-
+      loading = false;
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
+      loading = false;
     }
-
     loading = false;
   }
 
@@ -43,11 +42,39 @@ class UserManager extends ChangeNotifier {
       usuario.uid = result.user.uid;
       user = usuario;
       await usuario.saveData(usuario.uid);
-
+      loading = false;
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
+      loading = false;
     }
+    loading = false;
+  }
+
+  Future<void> signOut({Usuario usuario, Function onFail, Function onSuccess}) async {
+    // loading = true;
+    try {
+      await FirebaseAuth.instance.signOut();
+      onSuccess();
+      loading = false;
+    } on FirebaseAuthException catch (e) {
+      onFail(getErrorString(e.code));
+      loading = false;
+    }
+    loading = false;
+  }
+
+  Future<void> resetPassword({Usuario usuario, Function onFail, Function onSuccess}) async {
+    loading = true;
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: usuario.email,);
+      loading = false;
+      onSuccess();
+    } on FirebaseAuthException catch (e) {
+      onFail(getErrorString(e.code));
+      loading = false;
+    }
+    loading = false;
   }
 
 
