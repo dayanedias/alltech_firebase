@@ -72,11 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: false,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              hintText: "E-mail...",
+                              //hintText: "E-mail...",
+                              labelText: "E-mail...",
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: ColorConstant.colorMainOrange)),
-                              //errorText: _validate && _email.text.isEmpty ? 'Campo obrigatório' : _errorMessage == 'E-mail inválido' ? _errorMessage : null,
                             ),
                             validator: (email) {
                               if (email.isEmpty) return 'Campo obrigatório';
@@ -95,12 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
                             decoration: InputDecoration(
-                              hintText: "Senha...",
+                              //hintText: "Senha...",
+                              labelText: "Senha...",
                               border: OutlineInputBorder(),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: ColorConstant.colorMainOrange)),
-                              //errorText: _validate && _password.text.isEmpty ? 'Campo obrigatório' : _errorMessage == "E-mail e/ou senha não conferem" ? _errorMessage : null,
                             ),
                             validator: (password) {
                               if (password.isEmpty) {
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                           SizedBox(
-                            height: 8.0,
+                            height: 1.0,
                           ),
                           Align(
                             alignment: Alignment.centerRight,
@@ -131,51 +131,33 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 8.0,
                           ),
-                          GestureDetector(
-                              onTap: userManager.loading
+                          MaterialButton(
+                              elevation: 5.0,
+                              height: 50.0,
+                              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(5.0) ),
+                              color: ColorConstant.colorMainOrange,
+                              child: Text("Entrar", style: TextStyle(color: ColorConstant.colorMainBackground, fontSize: 18.0),),
+                              onPressed: userManager.loading
                                   ? null
                                   : () {
-                                      if (formKey.currentState.validate()) {
-                                        userManager.signIn(
-                                            usuario: Usuario(
-                                                email: _email.text,
-                                                password: _password.text),
-                                            onFail: (e) {
-                                              scaffoldKey.currentState
-                                                  .showSnackBar(SnackBar(
-                                                    content: Text("${e}"),
-                                                    backgroundColor: Colors.red,
-                                              ));
-                                            },
-                                            onSuccess: () {
-                                              print("Sucesso!");
-                                            });
-                                      }
-                                    },
-                              child: SizedBox(
-                                height: 50.0,
-                                child: AnimatedContainer(
-                                  alignment: Alignment.center,
-                                  width: 267.0,
-                                  height: 40.0,
-                                  duration: Duration(milliseconds: 5000),
-                                  curve: Curves.fastOutSlowIn,
-                                  decoration: BoxDecoration(
-                                      color: ColorConstant.colorMainOrange,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0))),
-                                  child: userManager.loading
-                                      ? CircularProgressIndicator(
-                                          valueColor: AlwaysStoppedAnimation(
-                                            ColorConstant.colorMainFont,
-                                          ),
-                                        )
-                                      : Text(
-                                          "Entrar",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                ),
-                              )),
+                                if (formKey.currentState.validate()) {
+                                  userManager.signIn(
+                                      usuario: Usuario(
+                                          email: _email.text,
+                                          password: _password.text),
+                                      onFail: (e) {
+                                        scaffoldKey.currentState
+                                            .showSnackBar(SnackBar(
+                                          content: Text("${e}"),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      },
+                                      onSuccess: () {
+                                        print("Sucesso!");
+                                      });
+                                }
+                              },
+                          ),
                         ],
                       );
                     },

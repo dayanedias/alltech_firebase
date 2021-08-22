@@ -1,6 +1,7 @@
 import 'package:alltech_new_firebase/src/screens/authentication/intro_screen.dart';
 import 'package:alltech_new_firebase/src/screens/authentication/login_screen.dart';
 import 'package:alltech_new_firebase/src/screens/config/create_user_screen.dart';
+import 'package:alltech_new_firebase/src/screens/home/connected_screen.dart';
 import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
 import 'package:alltech_new_firebase/src/screens/widgets/navigation_bar_widget.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
@@ -34,7 +35,7 @@ class LandingScreen extends StatelessWidget {
                     if(user == null) {
                       return LoginScreen();
                     } else {
-                      return NavigationBarWidget();
+                      return ConnectedScreen();
                     }
                   }
                   return Container();

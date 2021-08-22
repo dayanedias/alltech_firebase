@@ -18,6 +18,7 @@ dependencies:
   firebase_core: ^0.7.0
   cloud_firestore: ^0.16.0+1
   firebase_auth: ^0.20.1
+  firebase_storage: ^7.0.0
 
   #Provider
   provider: ^5.0.0
@@ -30,6 +31,7 @@ dependencies:
   multi_select_flutter: ^4.0.0
 
   image_picker: ^0.6.7+22
+  file_picker: ^2.1.7
 
   #authentication
   rxdart: ^0.27.1

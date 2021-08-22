@@ -22,10 +22,10 @@ class ConfigScreeen extends StatelessWidget {
               children: [
                 MaterialButton(
                   elevation: 5.0,
-                  height: 40.0,
+                  height: 50.0,
                   shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(5.0) ),
                   color: ColorConstant.colorMainOrange,
-                  child: Text("Criar novo usuário", style: TextStyle(color: ColorConstant.colorMainBackground, fontSize: 16.0),),
+                  child: Text("Criar novo usuário", style: TextStyle(color: ColorConstant.colorMainBackground, fontSize: 18.0),),
                     onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => CreateUserScreen())

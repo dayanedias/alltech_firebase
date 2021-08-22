@@ -12,6 +12,7 @@ class PerfilPage extends StatefulWidget {
 
 class _PerfilPageState extends State<PerfilPage> {
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -23,7 +24,6 @@ class _PerfilPageState extends State<PerfilPage> {
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: (e) {
-              print("onSELECTED, ${e}");
               if(e == 'Sair') context.read<UserManager>().signOut();
               if(e == "Trocar senha") { Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => ChangePassword())
@@ -49,8 +49,8 @@ class _PerfilPageState extends State<PerfilPage> {
                     children: [
                       SizedBox(height: 20.0,),
                       Container(
-                        width: 150.0,
-                        height: 150.0,
+                        width: 130.0,
+                        height: 130.0,
                         decoration: BoxDecoration(
                             border: Border.all(color: ColorConstant.colorMainOrange),
                             shape: BoxShape.circle,
@@ -58,6 +58,27 @@ class _PerfilPageState extends State<PerfilPage> {
                                 fit: BoxFit.fill,
                                 image: userManager.user.foto.isNotEmpty ? AssetImage(userManager.user.foto) : AssetImage('assets/images/images.png'),
                             )),
+                        child: userManager.user.uid == userManager.user.uid ?
+                        Padding(padding: EdgeInsets.only(left: 90.0),
+                          child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                height: 35.0,
+                                width: 35.0,
+                                margin: EdgeInsets.only(top: 20.0),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: ColorConstant.colorMainOrange,
+                                ),
+                                child: IconButton(
+                                  padding: EdgeInsets.only(bottom: 1.0),
+                                  icon: Icon(Icons.camera_alt),
+                                  color: ColorConstant.colorMainBackground,
+                                  onPressed: () {
+
+                                  },
+                                ),
+                              ))) : null
                       ),
                       SizedBox(height: 15.0,),
                       Text(

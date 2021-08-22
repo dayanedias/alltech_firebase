@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class PublicarScreen extends StatefulWidget {
@@ -11,13 +10,11 @@ class PublicarScreen extends StatefulWidget {
 }
 
 class _PublicarScreenState extends State<PublicarScreen> {
-  final _picker = ImagePicker();
   String _nome = '';
   String _atividade = '';
   String _descricao = '';
   //List<TipoAtividade> _atividadeSelecionada = [];
-  PickedFile imagem;
-  PickedFile imagemTemporaria;
+
   FocusNode _focusNode = new FocusNode();
 
   void initState() {
@@ -36,21 +33,6 @@ class _PublicarScreenState extends State<PublicarScreen> {
     });
   }
 
-  void capturarImagemGaleria() async {
-    imagemTemporaria =
-    await ImagePicker.platform.pickImage(source: ImageSource.gallery);
-    setState(() {
-      imagem = imagemTemporaria;
-    });
-  }
-
-  void capturarImagemCamera() async {
-    imagemTemporaria =
-    await ImagePicker.platform.pickImage(source: ImageSource.camera);
-    setState(() {
-      imagem = imagemTemporaria;
-    });
-  }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -160,11 +142,11 @@ class _PublicarScreenState extends State<PublicarScreen> {
             margin: EdgeInsets.all(24),
             child: Column(
               children: [
-                if (imagem != null)
-                  SizedBox(
-                    height: 200.0,
-                    child: Image.file(File(imagem.path)),
-                  ),
+                // if (imagem != null)
+                //   SizedBox(
+                //     height: 200.0,
+                //     child: Image.file(File(imagem.path)),
+                //   ),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -210,11 +192,11 @@ class _PublicarScreenState extends State<PublicarScreen> {
                     IconButton(
                         iconSize: 30.0,
                         icon: Icon(Icons.photo_camera_outlined),
-                        onPressed: () => {capturarImagemCamera()}),
+                        onPressed: () => { }),
                     IconButton(
                         iconSize: 30.0,
                         icon: Icon(Icons.folder_open),
-                        onPressed: () => {capturarImagemGaleria()}),
+                        onPressed: () => { }),
                     IconButton(
                         iconSize: 30.0,
                         icon: Icon(Icons.add_location_alt_outlined),

@@ -43,7 +43,8 @@ class _EsqueciSenhaAlertState extends State<EsqueciSenhaAlert> {
                     obscureText: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: "E-mail...",
+                      //hintText: "E-mail...",
+                      labelText: "E-mail...",
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: ColorConstant
@@ -74,7 +75,7 @@ class _EsqueciSenhaAlertState extends State<EsqueciSenhaAlert> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Cancelar")),
+                  child: Text("Cancelar", style: TextStyle(color: Colors.grey)),),
               TextButton(
                   onPressed:  () {
                     if (formKeyEsqueciSenha.currentState
@@ -96,7 +97,7 @@ class _EsqueciSenhaAlertState extends State<EsqueciSenhaAlert> {
                           });
                     }
                   },
-                  child: Text("Confirmar"))
+                  child: Text("Confirmar", style: TextStyle(color: ColorConstant.colorMainOrange)))
             ],
           );
         },

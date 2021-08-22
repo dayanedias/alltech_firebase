@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:alltech_new_firebase/src/models/usuario_model.dart';
 import 'package:alltech_new_firebase/src/utils/firebase_errors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserManager extends ChangeNotifier {
@@ -11,6 +14,7 @@ class UserManager extends ChangeNotifier {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
 
   Usuario user;
 
@@ -71,6 +75,51 @@ class UserManager extends ChangeNotifier {
       loading = false;
       onSuccess();
     } on FirebaseAuthException catch (e) {
+      onFail(getErrorString(e.code));
+      loading = false;
+    }
+    loading = false;
+  }
+
+  Future<void> changePassword({Usuario usuario, Function onFail, Function onSuccess}) async {
+    loading = true;
+
+    try {
+      await auth.currentUser.updatePassword(usuario.password).then((value) => print("MUDOU A SENHA"));
+      loading = false;
+      onSuccess();
+    } on FirebaseAuthException catch (e) {
+      onFail(getErrorString(e.code));
+      print("ERROR - ${e.code}");
+      loading = false;
+    }
+    loading = false;
+  }
+
+  Future<void> updateDataUser({Usuario usuario, Function onFail, Function onSuccess}) async { //TODO: Terminar de criar a função de update considerando que o usuário só pode alterar a foto
+    loading = true;
+    try {
+      user.admin ? await usuario.updateFoto(usuario.uid) : await usuario.updateDataUser(usuario.uid);
+      loading = false;
+      onSuccess();
+    } on FirebaseAuthException catch (e) {
+      onFail(getErrorString(e.code));
+      loading = false;
+    }
+    loading = false;
+  }
+
+
+  Future<void> updateFotoUser({Usuario usuario, Function onFail, Function onSuccess, File file}) async { //TODO: Terminar de criar a função de update considerando que o usuário só pode alterar a foto
+    loading = true;
+    try {
+      print("ENTROU AQUI - ${usuario.foto}");
+      final ref = storage.ref(usuario.foto);
+      await ref.putFile(file);
+      loading = false;
+      onSuccess();
+    } on FirebaseAuthException catch (e) {
+      print("ERROR - ${e.code}");
       onFail(getErrorString(e.code));
       loading = false;
     }

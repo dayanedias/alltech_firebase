@@ -1,8 +1,8 @@
 import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/models/usuario_model.dart';
+import 'package:alltech_new_firebase/src/screens/widgets/change_profile_picture.dart';
 import 'package:alltech_new_firebase/src/utils/helpers.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,15 +18,10 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
   final _regional = TextEditingController();
   final Usuario user = Usuario();
   bool _adm = false;
+  FocusNode myFocusNode = FocusNode();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  Future<void> _createUser() async {
-    // catch (e) {
-    //   print("Error $e");
-    // }
-  }
 
 
   @override
@@ -49,162 +44,171 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 return ListView(
                   shrinkWrap: true,
                   children: [
-                    TextFormField(
-                      controller: _nome,
-                      enabled: !userManager.loading,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Nome",
-                        hintText: "Insira o nome completo",
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: ColorConstant.colorMainOrange)
-                        ),
-                      ),
-                      validator: (nome){
-                        if(nome.isEmpty)
-                          return 'Campo obrigatório';
-                        else if(nome.trim().split(' ').length <= 1)
-                          return 'Insira o nome completo';
-                        return null;
-                      },
-                      onSaved: (nome) => user.nome = _nome.text
+                    ChangeProfilePicture(),
+                    SizedBox(
+                      height: 16.0,
                     ),
-                    SizedBox(height: 16.0,),
+                    TextFormField(
+                        controller: _nome,
+                        enabled: !userManager.loading,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 14.0, horizontal: 10.0),
+                          border: OutlineInputBorder(),
+                          labelText: "Nome completo",
+                          //hintText: "Nome completo",
+                          labelStyle:
+                              TextStyle(color: ColorConstant.colorInputFont),
+                          //hintText: "Insira o nome completo",
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstant.colorMainOrange)),
+                        ),
+                        validator: (nome) {
+                          if (nome.isEmpty)
+                            return 'Campo obrigatório';
+                          else if (nome.trim().split(' ').length <= 1)
+                            return 'Insira o nome completo';
+                          return null;
+                        },
+                        onSaved: (nome) => user.nome = _nome.text),
+                    SizedBox(
+                      height: 12.0,
+                    ),
                     TextFormField(
                       controller: _documento,
                       enabled: !userManager.loading,
                       obscureText: false,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 14.0, horizontal: 10.0),
                         border: OutlineInputBorder(),
-                        labelText: "Documento", //TODO: Mudar a cor do texto quando selecionado
-                        hintText: "Insira o documento",
+                        labelText: "Documento",
+                        //TODO: Mudar a cor do texto quando selecionado
+                        labelStyle:
+                            TextStyle(color: ColorConstant.colorInputFont),
+                        //hintText: "Insira o documento",
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: ColorConstant.colorMainOrange)
-                        ),
+                            borderSide: BorderSide(
+                                color: ColorConstant.colorMainOrange)),
                       ),
                       validator: (doc) {
-                        if(doc.isEmpty)
-                          return 'Campo obrigatório';
+                        if (doc.isEmpty) return 'Campo obrigatório';
                         return null;
                       },
                       onSaved: (doc) => user.documento = _documento.text,
                     ),
-                    SizedBox(height: 16.0,),
+                    SizedBox(
+                      height: 12.0,
+                    ),
                     TextFormField(
                       controller: _email,
                       keyboardType: TextInputType.emailAddress,
                       enabled: !userManager.loading,
                       obscureText: false,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 14.0, horizontal: 10.0),
                         border: OutlineInputBorder(),
                         labelText: "E-mail",
-                        hintText: "Insira o e-mail",
+                        labelStyle:
+                            TextStyle(color: ColorConstant.colorInputFont),
+                        //hintText: "Insira o e-mail",
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: ColorConstant.colorMainOrange)
-                        ),
+                            borderSide: BorderSide(
+                                color: ColorConstant.colorMainOrange)),
                       ),
                       validator: (email) {
-                        if(email.isEmpty)
-                          return 'Campo obrigatório';
-                        if(!Helpers.validateEmail(_email.text)) {
+                        if (email.isEmpty) return 'Campo obrigatório';
+                        if (!Helpers.validateEmail(_email.text)) {
                           return 'E-mail inválido';
                         }
                         return null;
                       },
                       onSaved: (email) => user.email = _email.text,
                     ),
-                    SizedBox(height: 16.0,),
-                    TextFormField(  //TODO: Trocar para um select
+                    SizedBox(
+                      height: 12.0,
+                    ),
+                    TextFormField(
+                      //TODO: Trocar para um select
                       controller: _regional,
                       enabled: !userManager.loading,
                       obscureText: false,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 14.0, horizontal: 10.0),
                         border: OutlineInputBorder(),
                         labelText: "Regional",
-                        hintText: "Selecione a Regional",
+                        labelStyle:
+                            TextStyle(color: ColorConstant.colorInputFont),
+                        //hintText: "Selecione a Regional",
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: ColorConstant.colorMainOrange)
-                        ),
+                            borderSide: BorderSide(
+                                color: ColorConstant.colorMainOrange)),
                       ),
                       validator: (regional) {
-                        if(regional.isEmpty)
-                          return 'Campo obrigatório';
+                        if (regional.isEmpty) return 'Campo obrigatório';
                         return null;
                       },
                       onSaved: (regional) => user.regional = _regional.text,
                     ),
-                    SizedBox(height: 16.0,),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 4.0),
-                              child: Text("Administrador", style: TextStyle(color: ColorConstant.colorMainFont),),
-                            )
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Checkbox(
-                                checkColor: ColorConstant.colorMainBackground,
-                                value: _adm,
-                                onChanged: (e){
-                                  setState(() {
-                                    _adm = !_adm;
-                                    user.admin = _adm;
-                                  });
-                                }),
-                          )
-                        ],
-                      ),
+                    SizedBox(
+                      height: 3.0,
                     ),
-                    SizedBox(height: 16.0,),
-                    GestureDetector(
-                        onTap: userManager.loading ? null : () {
-                          if(formKey.currentState.validate()) {
-                            formKey.currentState.save();
-                            user.password = Helpers.generatePassword(); //TODO: Descomentar o gerador de senha
-                            //user.password = '123456';
-                            userManager.signUp(
-                                usuario: user,
-                                onFail: (e) {
-                                  scaffoldKey.currentState.showSnackBar(
-                                      SnackBar(content: Text("${e}"),
+                    CheckboxListTile(
+                        contentPadding: EdgeInsets.only(left: 3.0, right: 0.0),
+                        title: Text(
+                          'Administrador',
+                          style: TextStyle(color: ColorConstant.colorMainFont),
+                        ),
+                        checkColor: ColorConstant.colorMainBackground,
+                        value: _adm,
+                        onChanged: (e) {
+                          setState(() {
+                            _adm = !_adm;
+                            user.admin = _adm;
+                          });
+                        }),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    MaterialButton(
+                      elevation: 5.0,
+                      height: 42.0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      color: ColorConstant.colorMainOrange,
+                      child: Text(
+                        "CADASTRAR",
+                        style: TextStyle(
+                          color: ColorConstant.colorButtonFont,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                      onPressed: userManager.loading
+                          ? null
+                          : () {
+                              if (formKey.currentState.validate()) {
+                                formKey.currentState.save();
+                                user.password = Helpers
+                                    .generatePassword(); //TODO: Descomentar o gerador de senha
+                                //user.password = '123456';
+                                userManager.signUp(
+                                    usuario: user,
+                                    onFail: (e) {
+                                      scaffoldKey.currentState
+                                          .showSnackBar(SnackBar(
+                                        content: Text("${e}"),
                                         backgroundColor: Colors.red,
-                                      )
-                                  );
-                                },
-                                onSuccess: () {
-                                  print("Sucesso!"); //TODO: POP
-                                }
-                            );
-                          }
-                        },
-                        child: SizedBox(
-                          height: 50.0,
-                          child: AnimatedContainer(
-                            alignment: Alignment.center,
-                            width: 267.0,
-                            height: 40.0,
-                            duration: Duration(milliseconds: 5000),
-                            curve: Curves.fastOutSlowIn,
-                            decoration: BoxDecoration(
-                                color: ColorConstant.colorMainOrange,
-                                borderRadius: BorderRadius.all(Radius.circular(5.0))
-                            ),
-                            child: userManager.loading ? CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(ColorConstant.colorMainFont,),
-                            ) : Text(
-                              "Cadastrar",
-                              style: TextStyle(
-                                  color: Colors.white
-                              ),
-                            ),
-                          ),
-                        )
+                                      ));
+                                    },
+                                    onSuccess: () {
+                                      print("Sucesso!"); //TODO: POP
+                                    });
+                              }
+                            },
                     ),
                   ],
                 );
