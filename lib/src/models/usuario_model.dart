@@ -34,10 +34,11 @@ class Usuario {
   }
 
   Future <void> updateFoto(String uid) async {
-      await firestoreRef.doc(uid).set(
-          {
-            'foto': foto,
-          });
+    print("ENTROU NO UPDATE");
+      await firestoreRef.doc(uid).update(toMap());
+          // {
+          //   'foto': foto,
+          // });
     }
 
 
@@ -56,6 +57,7 @@ class Usuario {
 
   Map<String, dynamic> toMap(){
     return {
+      'uid': uid,
       'nome': nome,
       'email': email,
       'documento': documento,

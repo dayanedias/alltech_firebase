@@ -15,6 +15,7 @@ class UserManager extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
+  CollectionReference get firestoreRef => FirebaseFirestore.instance.collection('usuario');
 
   Usuario user;
 
@@ -99,7 +100,7 @@ class UserManager extends ChangeNotifier {
   Future<void> updateDataUser({Usuario usuario, Function onFail, Function onSuccess}) async { //TODO: Terminar de criar a função de update considerando que o usuário só pode alterar a foto
     loading = true;
     try {
-      user.admin ? await usuario.updateFoto(usuario.uid) : await usuario.updateDataUser(usuario.uid);
+      //user.admin ? await usuario.updateFoto() : await usuario.updateDataUser(usuario.uid);
       loading = false;
       onSuccess();
     } on FirebaseAuthException catch (e) {
@@ -110,20 +111,24 @@ class UserManager extends ChangeNotifier {
   }
 
 
-  Future<void> updateFotoUser({Usuario usuario, Function onFail, Function onSuccess, File file}) async { //TODO: Terminar de criar a função de update considerando que o usuário só pode alterar a foto
+  Future<void> updateFotoUser({Usuario usuario, Function onFail, Function onSuccess}) async {
     loading = true;
+
     try {
-      print("ENTROU AQUI - ${usuario.foto}");
-      final ref = storage.ref(usuario.foto);
-      await ref.putFile(file);
+      await firestoreRef.doc(user.uid).update({
+        'foto': user.foto,
+      });
+      //await usuario.updateFoto(user.uid);
+      user = usuario;
       loading = false;
       onSuccess();
-    } on FirebaseAuthException catch (e) {
-      print("ERROR - ${e.code}");
-      onFail(getErrorString(e.code));
-      loading = false;
-    }
+     } on FirebaseException catch (e) {
+       onFail(getErrorString(e.code));
+       loading = false;
+     }
+
     loading = false;
+
   }
 
 
