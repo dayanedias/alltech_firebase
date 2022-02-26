@@ -192,8 +192,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 5.0, right: 5.0),
                               child: Text(
-                                atividade["cd_tipo_atividade"]
-                                ["descricao_atividade"],
+                                atividade["label"],
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 9.0,
@@ -223,10 +222,8 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
 
                             items: atividades.map((atividade) {
                               return DropdownMenuItem(
-                                value: atividade["cd_tipo_atividade"]
-                                ["id"].toString(),
-                                child: Text(atividade["cd_tipo_atividade"]
-                                ["descricao_atividade"]),
+                                value: atividades.indexOf(atividade["label"]).toString(),
+                                child: Text(atividade["label"]),
                               );
                             }).toList(),
 
