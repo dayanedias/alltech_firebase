@@ -1,6 +1,6 @@
 import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
-import 'package:alltech_new_firebase/src/screens/navigation/config_screen.dart';
+import 'package:alltech_new_firebase/src/screens/config/config_screen.dart';
 import 'package:alltech_new_firebase/src/screens/navigation/perfil_screen.dart';
 import 'package:alltech_new_firebase/src/screens/navigation/premio_screen.dart';
 import 'package:alltech_new_firebase/src/screens/navigation/publicar_screen.dart';

@@ -36,4 +36,11 @@ class Helpers {
     }).join('');
   }
 
+
+  // static bool validateInt(int number) {
+  //   final RegExp regex = RegExp(
+  //       r"^\d+$");
+  //   if(regex.hasMatch(number));
+  // }
+
 }

@@ -1,3 +1,5 @@
+import 'package:alltech_new_firebase/src/manager/premio_manager.dart';
+import 'package:alltech_new_firebase/src/manager/tipo_atividade_manager.dart';
 import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/screens/authentication/landing_screen.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
@@ -11,6 +13,8 @@ class AlltechApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => UserManager()),
+      ChangeNotifierProvider(create: (context) => TipoAtividadeManager()),
+      ChangeNotifierProvider(create: (context) => PremioManager()),
       StreamProvider<User>.value(
           value: FirebaseAuth.instance.authStateChanges()
       )

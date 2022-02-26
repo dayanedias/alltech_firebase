@@ -29,31 +29,16 @@ class Usuario {
   CollectionReference get firestoreRef => FirebaseFirestore.instance.collection('usuario');
   FirebaseStorage storage = FirebaseStorage.instance;
 
+  Future <void> updateFirstLogin() async {
+    await firestoreRef.doc(uid).update({
+      'first_login': false,
+    }).then((value) => print("ATUALIZOU FIRST LOGIN")).catchError((error) => print("FALHOU ATUALIZAR"));
+  }
+
   Future <void> saveData(String uid) async {
     await firestoreRef.doc(uid).set(toMap());
   }
 
-  Future <void> updateFoto(String uid) async {
-    print("ENTROU NO UPDATE");
-      await firestoreRef.doc(uid).update(toMap());
-          // {
-          //   'foto': foto,
-          // });
-    }
-
-
-  Future <void> updateDataUser(String uid) async {
-    await firestoreRef.doc(uid).update(
-        {
-          'nome': nome,
-          'email': email,
-          'regional': regional,
-          'documento': documento,
-          'admin': admin,
-          'foto' : foto,
-        }
-    );
-  }
 
   Map<String, dynamic> toMap(){
     return {
@@ -62,8 +47,9 @@ class Usuario {
       'email': email,
       'documento': documento,
       'data_inicio': DateTime.now(),
-      'admin': admin,
-      'foto' : foto,
+      'admin': admin ?? false,
+      'regional': regional,
+      'foto' : foto ?? 'https://firebasestorage.googleapis.com/v0/b/acs-interaction-v1.appspot.com/o/profile%2Fimages.png?alt=media&token=a2469419-696f-4a17-8c9a-b9c7aba1b5f2',
       'password': password,
       'first_login': true,
     };

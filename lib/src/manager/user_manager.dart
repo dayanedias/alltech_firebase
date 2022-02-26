@@ -45,7 +45,7 @@ class UserManager extends ChangeNotifier {
         password: usuario.password,
       );
       usuario.uid = result.user.uid;
-      user = usuario;
+      //user = usuario; //Troca para o usuário criado
       await usuario.saveData(usuario.uid);
       loading = false;
       onSuccess();
@@ -97,10 +97,12 @@ class UserManager extends ChangeNotifier {
     loading = false;
   }
 
-  Future<void> updateDataUser({Usuario usuario, Function onFail, Function onSuccess}) async { //TODO: Terminar de criar a função de update considerando que o usuário só pode alterar a foto
+  Future<void> updateFirstLoginUser({Usuario usuario, Function onFail, Function onSuccess}) async { //TODO: Terminar de criar a função de update considerando que o usuário só pode alterar a foto
     loading = true;
     try {
-      //user.admin ? await usuario.updateFoto() : await usuario.updateDataUser(usuario.uid);
+      await firestoreRef.doc(user.uid).update({
+        'first_login': false,
+      });
       loading = false;
       onSuccess();
     } on FirebaseAuthException catch (e) {
@@ -110,7 +112,6 @@ class UserManager extends ChangeNotifier {
     loading = false;
   }
 
-
   Future<void> updateFotoUser({Usuario usuario, Function onFail, Function onSuccess}) async {
     loading = true;
 
@@ -119,7 +120,7 @@ class UserManager extends ChangeNotifier {
         'foto': user.foto,
       });
       //await usuario.updateFoto(user.uid);
-      user = usuario;
+      //user = usuario;
       loading = false;
       onSuccess();
      } on FirebaseException catch (e) {

@@ -1,4 +1,6 @@
 import 'package:alltech_new_firebase/src/manager/user_manager.dart';
+import 'package:alltech_new_firebase/src/models/usuario_model.dart';
+import 'package:alltech_new_firebase/src/screens/widgets/change_profile_picture.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,7 @@ class _FirstLoginState extends State<FirstLogin> {
   final _atualSenha = TextEditingController();
   final _novaSenha = TextEditingController();
   final _novaSenhaConfirmacao = TextEditingController();
+  final Usuario user = Usuario();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -36,38 +39,8 @@ class _FirstLoginState extends State<FirstLogin> {
               builder: (context, userManager, __) {
                 return ListView(
                   children: [
-                    Container(
-                      width: 130.0,
-                      height: 130.0,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: ColorConstant.colorMainOrange),
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fitHeight,
-                            image: userManager.user.foto.isNotEmpty ? AssetImage(userManager.user.foto) : AssetImage('assets/images/images.png'),
-                          )),
-                      child:
-                      Padding(padding: EdgeInsets.only(left: 90.0),
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: 35.0,
-                                width: 35.0,
-                                margin: EdgeInsets.only(top: 20.0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: ColorConstant.colorMainOrange,
-                                ),
-                                child: IconButton(
-                                  padding: EdgeInsets.only(bottom: 1.0),
-                                  icon: Icon(Icons.camera_alt),
-                                  color: ColorConstant.colorMainBackground,
-                                  onPressed: () {
-
-                                  },
-                                ),
-                              ))),
-                    ),
+                    SizedBox(height: 20.0),
+                    ChangeProfilePicture(),
                     SizedBox(height: 16.0),
                     TextFormField(
                       controller: _novaSenha,
@@ -84,7 +57,7 @@ class _FirstLoginState extends State<FirstLogin> {
                       validator: (senha1){
                         if(senha1.isEmpty)
                           return 'Campo obrigatório';
-                        if(senha1.length < 7)
+                        if(senha1.length < 6)
                           return 'Senha muito curta';
                         return null;
                       },
@@ -106,7 +79,7 @@ class _FirstLoginState extends State<FirstLogin> {
                       validator: (senha2){
                         if(senha2.isEmpty)
                           return 'Campo obrigatório';
-                        if(senha2.length < 7)
+                        if(senha2.length < 6)
                           return 'Senha muito curta';
                         return null;
                       },
@@ -122,10 +95,11 @@ class _FirstLoginState extends State<FirstLogin> {
                         onPressed: () {
                           if(formKey.currentState.validate()){
                             if(_novaSenha.text == _novaSenhaConfirmacao.text) {
+                              userManager.user.first_login = false;
                               userManager.changePassword();
                               Navigator.of(context).pop();
                             } else {
-                              print("SENHAS não conferem");
+                              print("SENHAS não conferem"); //TODO: Fazer resposta de erro ao usuário
                             }
                           }
                         }

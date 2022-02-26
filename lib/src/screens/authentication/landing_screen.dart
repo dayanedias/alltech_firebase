@@ -1,9 +1,12 @@
+import 'package:alltech_new_firebase/src/manager/publicacao_manager.dart';
+import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/screens/authentication/intro_screen.dart';
 import 'package:alltech_new_firebase/src/screens/authentication/login_screen.dart';
 import 'package:alltech_new_firebase/src/screens/config/create_user_screen.dart';
 import 'package:alltech_new_firebase/src/screens/home/connected_screen.dart';
 import 'package:alltech_new_firebase/src/screens/home/home_screen.dart';
 import 'package:alltech_new_firebase/src/screens/widgets/navigation_bar_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +29,25 @@ class LandingScreen extends StatelessWidget {
             );
           }
 
+          // if(snapshot.connectionState == ConnectionState.done) {
+          //   return MultiProvider(
+          //     providers:[
+          //       Provider<UserManager>(create: (_) -)
+          //     ]
+          //     builder: (context, snapshot) {
+          //       if(snapshot.connectionState == ConnectionState.active) {
+          //         User user = snapshot.data;
+          //         if(user == null) {
+          //           return LoginScreen();
+          //         } else {
+          //           return ConnectedScreen();
+          //         }
+          //       }
+          //       return Container();
+          //     },
+          //   );
+          // }
+
           if(snapshot.connectionState == ConnectionState.done) {
             return StreamBuilder(
               stream: FirebaseAuth.instance.authStateChanges(),
@@ -35,7 +57,13 @@ class LandingScreen extends StatelessWidget {
                     if(user == null) {
                       return LoginScreen();
                     } else {
-                      return ConnectedScreen();
+                      return MultiProvider(
+                        providers: [
+                          ListenableProvider<UserManager>(create: (_) => UserManager()),
+                          ListenableProvider<PublicacaoManager>(create: (_) => PublicacaoManager()),
+                      ],
+                      child: ConnectedScreen(),
+                      );
                     }
                   }
                   return Container();

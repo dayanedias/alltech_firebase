@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:alltech_new_firebase/src/utils/values/colors.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class PublicacaoWidget extends StatefulWidget {
+  final String uid_usuario;
   final String nome_usuario;
   final String regional_usuario;
   final String foto_usuario;
@@ -9,30 +13,48 @@ class PublicacaoWidget extends StatefulWidget {
   final String descricao;
   final double localizacao;
   final List atividades;
+  final List documentos;
+  final List midia;
+  // final List video;
+  final List quiz;
+  final List comentarios;
 
   PublicacaoWidget(
       {Key key,
-        @required this.nome_usuario,
-        @required this.regional_usuario,
+        @required this.uid_usuario,
+        this.regional_usuario,
+        this.nome_usuario,
         this.foto_usuario,
         this.data_post,
         this.descricao,
         this.localizacao,
-        this.atividades})
+        this.atividades,
+        this.documentos,
+        this.midia,
+        // this.video,
+        this.quiz,
+        this.comentarios})
       : super(key: key);
 
   @override
   _PublicacaoWidgetState createState() => _PublicacaoWidgetState(
+      uid_usuario,
       nome_usuario,
       regional_usuario,
       foto_usuario,
       data_post,
       descricao,
       localizacao,
-      atividades);
+      atividades,
+      documentos,
+      midia,
+      // video,
+      quiz,
+      comentarios);
 }
 
 class _PublicacaoWidgetState extends State<PublicacaoWidget> {
+  final String uid_usuario;
   final String nome_usuario;
   final String regional_usuario;
   final String foto_usuario;
@@ -40,16 +62,27 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
   final String descricao;
   final double localizacao;
   final List atividades;
+  final List documentos;
+  final List midia;
+  // final List video;
+  final List quiz;
+  final List comentarios;
   bool _comentarios = false;
 
   _PublicacaoWidgetState(
+      this.uid_usuario,
       this.nome_usuario,
       this.regional_usuario,
       this.foto_usuario,
       this.data_post,
       this.descricao,
       this.localizacao,
-      this.atividades);
+      this.atividades,
+      this.documentos,
+      this.midia,
+      // this.video,
+      this.quiz,
+      this.comentarios);
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +98,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                     height: 50.0,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey),
                       image: DecorationImage(
                           fit: BoxFit.fill,
                           image: foto_usuario == null
@@ -78,11 +112,20 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${nome_usuario} - ${regional_usuario}',
+                      '${nome_usuario}',
                       style: TextStyle(
-                          fontSize: 15.0,
+                          fontSize: 16.0,
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      regional_usuario,
+                      style: TextStyle(
+                          fontSize: 12.0,
+                          color: ColorConstant.colorAdmFont),
+                    ),
+                    SizedBox(
+                      height: 4.0,
                     ),
                     Text(
                       //data_post.toString(),
@@ -91,12 +134,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                           fontSize: 10.0,
                           color: Color.fromRGBO(134, 134, 140, 1)),
                     ),
-                    Text(
-                      "São Paulo, Brasil",
-                      style: TextStyle(
-                          fontSize: 10.0,
-                          color: Color.fromRGBO(134, 134, 140, 1)),
-                    ),
+
                   ],
                 ),
               ],
@@ -113,6 +151,27 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
           ),
           SizedBox(
             height: 10.0,
+          ),
+          CarouselSlider(
+            options: CarouselOptions(
+                height: 250.0,
+                autoPlay: false,
+              // enableInfiniteScroll: false,
+            ),
+            items: [1,2,3,4,5].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                          color: Colors.amber
+                      ),
+                      child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                  );
+                },
+              );
+            }).toList(),
           ),
           Container(
               padding: EdgeInsets.only(left: 20.0),
@@ -191,9 +250,9 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                   ),
                 ],
               )),
-          Container(padding: EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Image(image: AssetImage('images/plantacao.jpg')),
-          ),
+          // Container(padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          //   child: Image(image: AssetImage('images/plantacao.jpg')),
+          // ),
           // Ações: Curtir, comentar
           Container(
               child: Center(

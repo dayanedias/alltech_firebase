@@ -11,9 +11,9 @@ class ConnectedScreen extends StatelessWidget {
     return Consumer<UserManager>(
         builder: (context, userManager, __){
           if(userManager.user != null){
-            if (userManager.user.first_login) {
-              return FirstLogin();
-            }
+            // if (userManager.user.first_login) {
+            //   return FirstLogin();
+            // }
             return NavigationBarWidget();
           }
           return Container(

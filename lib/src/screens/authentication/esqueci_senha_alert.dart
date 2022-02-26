@@ -1,6 +1,6 @@
 import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/models/usuario_model.dart';
-import 'package:alltech_new_firebase/src/screens/navigation/config_screen.dart';
+import 'package:alltech_new_firebase/src/screens/config/config_screen.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

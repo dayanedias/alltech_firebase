@@ -42,22 +42,6 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
     }
   }
 
-  // void capturarImagemGaleria() async {
-  //   imagemTemporaria =
-  //       await ImagePicker.platform.pickImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     imagem = imagemTemporaria;
-  //   });
-  // }
-  //
-  // void capturarImagemCamera() async {
-  //   imagemTemporaria =
-  //       await ImagePicker.platform.pickImage(source: ImageSource.camera);
-  //   setState(() {
-  //     imagem = imagemTemporaria;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<UserManager>(
@@ -70,9 +54,7 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fitHeight,
-                  image: userManager.user.foto.isNotEmpty
-                    ? NetworkImage(userManager.user.foto)
-                    : AssetImage('assets/images/images.png'),
+                  image: NetworkImage(userManager.user.foto),
                 )),
             child: userManager.user.uid == userManager.user.uid
                 ? Padding(
@@ -110,8 +92,9 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                                                       imagemTemporaria = await ImagePicker().getImage(source: ImageSource.camera);
                                                       Navigator.of(context).pop();
                                                       await uploadFile(filePath: imagemTemporaria.path, uid: userManager.user.uid);
-                                                      print("VOLTOU ${imagemFinal} =====");
+                                                      // print("VOLTOU ${imagemFinal} =====");
                                                       userManager.user.foto = imagemFinal;
+                                                      user.foto = imagemFinal;
                                                       userManager.updateFotoUser();
                                                       // setState(() async {
                                                       //   //imagemPath = imagemTemporaria.path;
@@ -139,8 +122,14 @@ class _ChangeProfilePictureState extends State<ChangeProfilePicture> {
                                                   height: 2.0,
                                                 ),
                                                 TextButton(
-                                                    onPressed: () {
-                                                     // capturarImagemGaleria();
+                                                    onPressed: () async {
+                                                      imagemTemporaria = await ImagePicker().getImage(source: ImageSource.gallery);
+                                                      Navigator.of(context).pop();
+                                                      await uploadFile(filePath: imagemTemporaria.path, uid: userManager.user.uid);
+                                                      print("VOLTOU ${imagemFinal} =====");
+                                                      userManager.user.foto = imagemFinal;
+                                                      user.foto = imagemFinal;
+                                                      userManager.updateFotoUser();
                                                     },
                                                     child: Row(children: [
                                                       Icon(

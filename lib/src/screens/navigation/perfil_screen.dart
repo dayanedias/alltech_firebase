@@ -1,5 +1,6 @@
 import 'package:alltech_new_firebase/src/manager/user_manager.dart';
 import 'package:alltech_new_firebase/src/screens/config/change_password.dart';
+import 'package:alltech_new_firebase/src/screens/widgets/change_profile_picture.dart';
 import 'package:alltech_new_firebase/src/utils/values/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,39 +49,8 @@ class _PerfilPageState extends State<PerfilPage> {
                   child: Column(
                     children: [
                       SizedBox(height: 20.0,),
-                      Container(
-                        width: 130.0,
-                        height: 130.0,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: ColorConstant.colorMainOrange),
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: userManager.user.foto.isNotEmpty ? AssetImage(userManager.user.foto) : AssetImage('assets/images/images.png'),
-                            )),
-                        child: userManager.user.uid == userManager.user.uid ?
-                        Padding(padding: EdgeInsets.only(left: 90.0),
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: 35.0,
-                                width: 35.0,
-                                margin: EdgeInsets.only(top: 20.0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: ColorConstant.colorMainOrange,
-                                ),
-                                child: IconButton(
-                                  padding: EdgeInsets.only(bottom: 1.0),
-                                  icon: Icon(Icons.camera_alt),
-                                  color: ColorConstant.colorMainBackground,
-                                  onPressed: () {
-
-                                  },
-                                ),
-                              ))) : null
-                      ),
-                      SizedBox(height: 15.0,),
+                      ChangeProfilePicture(),
+                      SizedBox(height: 16.0,),
                       Text(
                         userManager.user.nome, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                       ),

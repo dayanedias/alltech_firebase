@@ -7,4 +7,5 @@ class ColorConstant {
   static const Color colorSecondaryFont = Color(0xFF9E9E9E);
   static const Color colorInputFont = Color(0xFF929FB1);
   static const Color colorButtonFont = Color(0xFFD5E5E0);
+  static const Color colorAdmFont = Color(0xFF546B80);
 }
