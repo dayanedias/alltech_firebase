@@ -8,9 +8,10 @@ class Publicacao{
   //DateTime data_inicio;
   String descricao;
   CollectionReference midia;
+  CollectionReference likes;
   DateTime data_inicio;
 
 
-  Publicacao({ this.uui, this.ativo, this.atividades, this.localizacao, this.descricao, this.midia, this.data_inicio });
+  Publicacao({ this.uui, this.ativo, this.atividades, this.localizacao, this.descricao, this.midia, this.likes, this.data_inicio });
 
 }

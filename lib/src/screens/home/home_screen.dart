@@ -40,8 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: snapshot.data.docs.length,
                           itemBuilder: (context, index) {
                             DocumentSnapshot ds = snapshot.data.docs[index];
-                            print(ds.data()['uid']);
-                            print(ds['usuario']['nome']);
                             return Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               // child: PublicacaoWidget(nome_usuario: userManager.user.nome, regional_usuario: userManager.user.regional, foto_usuario: userManager.user.foto,),
@@ -54,10 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 descricao: ds['descricao'],
                                 data_post: ds['data_inicio'],
                                 atividades: ds['atividades'] ?? ds['atividades'],
-                                //midia: ds['midia'] ?? ds['midia'],
-                                // comentarios: ds['comentarios'] ?? ds['comentarios'],
+                                midia: ds['midia'] ?? ds['midia'],
+                                comentarios: ds['comentarios'] ?? ds['comentarios'],
                                 // documentos: ds['documentos'] ?? ds['documentos'],
-                                // foto: ds['foto'] ?? ds['foto'],
+                                likes: ds['likes'] ?? ds['likes'],
                                 // quiz: ds['quiz'] ?? ds['quiz'],
                                 )
                               :

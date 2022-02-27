@@ -15,7 +15,7 @@ class PublicacaoWidget extends StatefulWidget {
   final List atividades;
   final List documentos;
   final List midia;
-  // final List video;
+  final List likes;
   final List quiz;
   final List comentarios;
 
@@ -31,7 +31,7 @@ class PublicacaoWidget extends StatefulWidget {
         this.atividades,
         this.documentos,
         this.midia,
-        // this.video,
+        this.likes,
         this.quiz,
         this.comentarios})
       : super(key: key);
@@ -48,7 +48,7 @@ class PublicacaoWidget extends StatefulWidget {
       atividades,
       documentos,
       midia,
-      // video,
+      likes,
       quiz,
       comentarios);
 }
@@ -64,7 +64,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
   final List atividades;
   final List documentos;
   final List midia;
-  // final List video;
+  final List likes;
   final List quiz;
   final List comentarios;
   bool _comentarios = false;
@@ -80,7 +80,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
       this.atividades,
       this.documentos,
       this.midia,
-      // this.video,
+      this.likes,
       this.quiz,
       this.comentarios);
 
@@ -152,27 +152,6 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
           SizedBox(
             height: 10.0,
           ),
-          CarouselSlider(
-            options: CarouselOptions(
-                height: 250.0,
-                autoPlay: false,
-              // enableInfiniteScroll: false,
-            ),
-            items: [1,2,3,4,5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                          color: Colors.amber
-                      ),
-                      child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-                  );
-                },
-              );
-            }).toList(),
-          ),
           Container(
               padding: EdgeInsets.only(left: 20.0),
               child: Row(
@@ -182,7 +161,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                         .map((atividade) => Padding(
                       padding: EdgeInsets.only(right: 3.0),
                       child: Container(
-                        width: 83.0,
+                        width: 92.0,
                         height: 20.0,
                         decoration: BoxDecoration(
                             borderRadius:
@@ -205,51 +184,78 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                     ))
                         .toList(),
                   ),
-                  Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 12.0),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: DropdownButton<String>(
-                            //value: '',
-                            icon: const Icon(
-                              Icons.more_vert_outlined,
-                              size: 24.0,
-                            ),
-                            underline: Container(height: 0,),
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 12.0),
 
-                            items: atividades.map((atividade) {
-                              return DropdownMenuItem(
-                                value: atividades.indexOf(atividade["label"]).toString(),
-                                child: Text(atividade["label"]),
-                              );
-                            }).toList(),
+                  //TODO: Arrumar os 3 pontinhos
 
-                            // items: <String>[
-                            //   'Regionais',
-                            //   'One',
-                            //   'Two',
-                            //   'Free',
-                            //   'Four',
-                            // ].map<DropdownMenuItem<String>>((String value) {
-                            //   return DropdownMenuItem<String>(
-                            //     value: value,
-                            //     child: Text(value),
-                            //   );
-                            // }).toList(),
-
-                            onChanged: (e) {},
-                          ),
-                        ),
-                      )
-                  ),
+                  // Expanded(
+                  //     child: Padding(
+                  //       padding: EdgeInsets.only(right: 10.0),
+                  //       child: Align(
+                  //         alignment: Alignment.centerRight,
+                  //         child: DropdownButton<String>(
+                  //           //value: '',
+                  //           icon: const Icon(
+                  //             Icons.more_vert_outlined,
+                  //             size: 18.0,
+                  //           ),
+                  //           underline: Container(height: 0,),
+                  //           style: const TextStyle(
+                  //               color: Colors.black, fontSize: 12.0),
+                  //           items: atividades.map((atividade) {
+                  //             return DropdownMenuItem(
+                  //               value: atividades.indexOf(atividade["label"]).toString(),
+                  //               child: Text(atividade["label"]),
+                  //             );
+                  //           }).toList(),
+                  //
+                  //           // items: <String>[
+                  //           //   'Regionais',
+                  //           //   'One',
+                  //           //   'Two',
+                  //           //   'Free',
+                  //           //   'Four',
+                  //           // ].map<DropdownMenuItem<String>>((String value) {
+                  //           //   return DropdownMenuItem<String>(
+                  //           //     value: value,
+                  //           //     child: Text(value),
+                  //           //   );
+                  //           // }).toList(),
+                  //
+                  //           onChanged: (e) {},
+                  //         ),
+                  //       ),
+                  //     )
+                  // ),
                 ],
               )),
           // Container(padding: EdgeInsets.only(left: 20.0, right: 20.0),
           //   child: Image(image: AssetImage('images/plantacao.jpg')),
           // ),
+          SizedBox(
+            height: 12.0,
+          ),
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 250.0,
+              autoPlay: false,
+              // enableInfiniteScroll: false,
+            ),
+            items: [1,2,3,4,5].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                          color: Colors.amber
+                      ),
+                      child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                  );
+                },
+              );
+            }).toList(),
+          ),
+
           // Ações: Curtir, comentar
           Container(
               child: Center(
@@ -263,7 +269,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                           //Icon(Icons.thumb_up_alt_outlined),
                           onPressed: () {},
                         ),
-                        Text("8 curtidas",
+                        Text('${likes.length.toString()} Curtida${likes.length > 1 ? 's' : ''}',
                             style: TextStyle(
                                 fontSize: 10.0,
                                 color: Color.fromRGBO(134, 134, 140, 1))),
@@ -282,7 +288,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
                             });
                           },
                         ),
-                        Text("4 comentários",
+                        Text("${comentarios.length} comentário${comentarios.length > 1 ? 's' : ''}",
                             style: TextStyle(
                                 fontSize: 10.0,
                                 color: Color.fromRGBO(134, 134, 140, 1))),
