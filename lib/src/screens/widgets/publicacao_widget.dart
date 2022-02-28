@@ -86,6 +86,7 @@ class _PublicacaoWidgetState extends State<PublicacaoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var likesCount = likes.map((like) => like['active']);
     return Container(
       color: Color.fromRGBO(189, 189, 189, 0.39),
       child: Column(
